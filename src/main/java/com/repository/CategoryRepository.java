@@ -10,4 +10,6 @@ public interface CategoryRepository extends CrudRepository<CategoryBean, Integer
 
 	CategoryBean findByCategoryId(Integer categoryId);
 
+	CategoryBean findByCategoryName(String categoryName);
+
 }

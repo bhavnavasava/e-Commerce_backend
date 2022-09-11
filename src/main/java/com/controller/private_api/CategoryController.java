@@ -29,9 +29,27 @@ public class CategoryController {
 	@PostMapping("/addcategory")
 	public ResponseEntity<?> addCategory(@RequestBody CategoryBean category){
 		
-		categoryRepository.save(category);
-		return ResponseEntity.ok(category);
+//		categoryRepository.save(category);
+//		return ResponseEntity.ok(category);
+		
+		ResponseBean<CategoryBean> res =new ResponseBean<>();
+	
+		CategoryBean Category=categoryRepository.findByCategoryName(category.getCategoryName());
+		if(Category==null)
+		{
+			System.out.println("add cat");
+			categoryRepository.save(category);
+			res.setData(category);
+			res.setMessage("category added");
+			return ResponseEntity.ok(res); 
+		}
+		else {
+			res.setMessage(" This Category is AllReady Available");
+			res.setData(category);
+			return ResponseEntity.ok(res);
+		}
 	}
+	
 	
 	@GetMapping("/getcategories")
 	public ResponseEntity<?> getAllCategories(){
@@ -47,8 +65,7 @@ public class CategoryController {
 		ResponseBean<CategoryBean> res = new ResponseBean<>();
 
 		if (category == null) {
-			res.setMessage("invalid categoryID");
-			
+			res.setMessage("invalid categoryID");	
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
 		} else {
 			categoryRepository.deleteById(categoryId);

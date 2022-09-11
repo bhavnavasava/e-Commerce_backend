@@ -20,6 +20,7 @@ public class UserBean {
 	String email;
 	String password;
 	String gender;
+	Integer otp;
 	
 	@ManyToOne
 	@JoinColumn(name = "roleId" )
@@ -79,6 +80,14 @@ public class UserBean {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public Integer getOtp() {
+		return otp;
+	}
+
+	public void setOtp(Integer otp) {
+		this.otp = otp;
 	}
 	
 }

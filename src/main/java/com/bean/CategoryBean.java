@@ -24,6 +24,10 @@ public class CategoryBean {
 	@JsonIgnore
 	@OneToMany(mappedBy="categories")
 	List<SubCategoryBean> subCategories;
+		
+	@JsonIgnore
+	@ManyToMany(mappedBy="categories")
+	List<ProductBean> products;
 
 	public Integer getCategoryId() {
 		return categoryId;
